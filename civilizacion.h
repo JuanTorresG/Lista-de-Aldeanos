@@ -43,4 +43,29 @@ Civilizacion *Civilizacion_free(Civilizacion *civilizacion){
     return civilizacion;
 } 
 
+bool Civilizacion_mostrar(Civilizacion *civilizacion){
+    if(civilizacion == NULL){
+        puts("La civilizacion no tiene memoria");
+        return false;
+    }
+
+    printf("\nNombre Civilizacio: %s\n",civilizacion->nombre);
+
+    if(AldeanosLista_motrar_tabla(civilizacion->aldeanosLista)){
+        puts("AldeanosLista: se mostro lista de aldenos");
+    }else{
+        puts("AldeanosLista: error al mostrar lista de aldeanos");
+        return false;
+    }
+
+    return true;
+}
+
+Civilizacion *Civilizacion_capturar(){
+    char *nombre = leerCadena("\nNombre de la civilizacion: ");
+
+    Civilizacion *civilizacion = Civilizacion_init(nombre);
+
+    return civilizacion;
+}
 #endif
