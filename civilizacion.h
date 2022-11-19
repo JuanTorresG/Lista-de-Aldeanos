@@ -6,10 +6,12 @@
 #include<string.h>
 
 #include"lista_aldeanos.h"
+#include"puerto.h"
 
 struct civilizacion{
     char *nombre;
     AldeanosLista *aldeanosLista;
+    Puerto *puerto;
 };
 
 typedef struct civilizacion Civilizacion;
@@ -25,6 +27,8 @@ Civilizacion *Civilizacion_init(char *nombre){
 
     civilizacion->nombre = strdup(nombre);
     civilizacion->aldeanosLista = AldeanosLista_init();
+    civilizacion->puerto = Puerto_init();
+
 
     if(civilizacion->aldeanosLista == NULL) puts("\nError al crear AldeanosLista\n");
 
@@ -39,8 +43,36 @@ Civilizacion *Civilizacion_free(Civilizacion *civilizacion){
     }
     free(civilizacion->nombre);
     civilizacion->aldeanosLista = AldeanosLista_free(civilizacion->aldeanosLista);
+    civilizacion->puerto = Puerto_free(civilizacion->puerto);
     civilizacion = NULL;
     return civilizacion;
 } 
 
+bool Civilizacion_mostrar(Civilizacion *civilizacion){
+    if(civilizacion == NULL){
+        puts("La civilizacion no tiene memoria");
+        return false;
+    }
+
+    printf("\nNombre Civilizacio: %s\n",civilizacion->nombre);
+
+    printf("\nCantidad de barcos %zu\n",civilizacion->puerto->cantidad);
+
+    if(AldeanosLista_motrar_tabla(civilizacion->aldeanosLista)){
+        puts("AldeanosLista: se mostro lista de aldenos");
+    }else{
+        puts("AldeanosLista: error al mostrar lista de aldeanos");
+        return false;
+    }
+
+    return true;
+}
+
+Civilizacion *Civilizacion_capturar(){
+    char *nombre = leerCadena("\nNombre de la civilizacion: ");
+
+    Civilizacion *civilizacion = Civilizacion_init(nombre);
+
+    return civilizacion;
+}
 #endif

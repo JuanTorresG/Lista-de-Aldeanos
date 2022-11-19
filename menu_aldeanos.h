@@ -5,6 +5,7 @@
 #include<stdlib.h>
 
 #include "lista_aldeanos.h"
+#include "menu_puerto.h"
 
 typedef enum{
     SALIR = 0,
@@ -23,7 +24,7 @@ void menu_aldeanos(AldeanosLista *aldeanosLista){
     Aldeano *aldeano;
     size_t posicion;
     do{
-        puts("1.- Agregar Inicio");
+        puts("\n1.- Agregar Inicio");
         puts("2.- Agregar Final");
         puts("3.- Insertar");
         puts("4.- Mostrar");
@@ -102,7 +103,7 @@ void menu_aldeanos(AldeanosLista *aldeanosLista){
                     puts("Se elimino en posicion\n");
                 }else puts("\nError al eliminar\n");
                 break;
-            
+
             case SALIR:
                 break;
 
