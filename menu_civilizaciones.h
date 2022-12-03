@@ -11,19 +11,23 @@ void menu_civilizaciones(Civilizaciones *civilizaciones){
         INSERTAR_INICIO, INSERTAR_FINAL,
         MOSTRAR,
         ELIMINAR_INICIO, ELIMINAR_FINAL,
-        BUSCAR
+        BUSCAR,
+        RESPALDAR,
+        RECUPERAR
     }MENU_CIVILIZACIONES;
 
     int op;
     Civilizacion *civilizacion;
 
     do{
-        puts("1. Insertar incio");
+        puts("1. Insertar inicio");
         puts("2. Insertar final");
         puts("3. Mostrar");
         puts("4. Eliminar inicio");
         puts("5. Eliminar final");
         puts("6. Buscar");
+        puts("7. Respaldar");
+        puts("8. Recuperar");
         puts("0. Salir");
         scanf("%i",&op);
         
@@ -84,6 +88,20 @@ void menu_civilizaciones(Civilizaciones *civilizaciones){
                     continue;
                 }
                 menu_civilizacion(civilizacion);
+                break;
+
+            case RESPALDAR:
+                if(Civilizaciones_respaldar(civilizaciones)){
+                    puts("Civilizaciones: respaldo realizado");
+                }else puts("Civilizaciones: error al crear respaldo");
+
+                break;
+
+            case RECUPERAR:
+                if(Civilizaciones_recuperar(civilizaciones)){
+                    puts("Civilizaciones: recuperar con exito");
+                }else puts("Civilizaciones: error al recuperar");
+
                 break;
             
             case SALIR:

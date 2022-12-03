@@ -49,7 +49,7 @@ Barco *Barco_free(Barco *barco){
 
 bool Barco_mostrar(Barco *barco){
     if(barco == NULL){
-        puts("El varco no tiene memoria");
+        puts("El barco no tiene memoria");
         return false;
     }
         printf("%-7zu %15.1f %12.1f %11.1f %12zu\n",barco->id,barco->combustible,barco->velocidad,barco->armadura,barco->guerreros->cantidad);

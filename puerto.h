@@ -179,6 +179,69 @@ bool Puerto_eliminar_final(Puerto *listaLigadaDoble){
 
     return true;
 }
+bool Puerto_remover_inicio(Puerto *listaLigadaDoble){
+    if(listaLigadaDoble == NULL){
+        puts("ListaLigadaDoble: no tiene memoria");
+        exit(1);
+    }
+
+    if(Puerto_vacia(listaLigadaDoble)){
+        puts("ListaLigadaDoble: vacia");
+        return false;
+    }
+
+    // repaldar el nodoDoble inicial
+    NodoDobleBarco *temp = listaLigadaDoble->inicio;
+
+    // enlazar raiz hacia el nodoDoble siguiente
+    listaLigadaDoble->inicio = temp->siguiente; 
+    
+    // decrementar la cantidad
+    listaLigadaDoble->cantidad--;
+
+    if(Puerto_vacia(listaLigadaDoble)){
+        listaLigadaDoble->final = NULL;
+    }else{
+        listaLigadaDoble->inicio->anterior = NULL;
+    }
+    // liberar el respaldo
+    free(temp);
+    temp = NULL;
+
+    return true;
+}
+
+bool Puerto_remover_final(Puerto *listaLigadaDoble){
+    if(listaLigadaDoble == NULL){
+        puts("ListaLigadaDoble: no tiene memoria");
+        exit(1);
+    }
+
+    if(Puerto_vacia(listaLigadaDoble)){
+        puts("ListaLigadaDoble: vacia");
+        return false;
+    }
+
+    // repaldar el nodoDoble final
+    NodoDobleBarco *temp = listaLigadaDoble->final;
+
+    // enlazar raiz hacia el nodoDoble anterio
+    listaLigadaDoble->final = temp->anterior; 
+    
+    // decrementar la cantidad
+    listaLigadaDoble->cantidad--;
+
+    if(Puerto_vacia(listaLigadaDoble)){
+        listaLigadaDoble->inicio = NULL;
+    }else{
+        listaLigadaDoble->final->siguiente = NULL;
+    }
+    // liberar el respaldo
+    free(temp);
+    temp = NULL;
+
+    return true;
+}
 
 Puerto *Puerto_free(Puerto *listaLigadaDoble){
     if(listaLigadaDoble == NULL){

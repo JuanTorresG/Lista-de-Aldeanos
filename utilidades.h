@@ -26,7 +26,7 @@ int leerInt(char *mensaje){
     return entero;
 }
 
-int leerSize_t(char *mensaje){
+size_t leerSize_t(char *mensaje){
     size_t st;
 
     printf("%s",mensaje);

@@ -76,4 +76,44 @@ bool Aldeano_mostrar_fila(Aldeano *aldeano){
     return NO_ERROR;
 }
 
+bool Aldeano_respaldar(Aldeano *aldeano, FILE *archivo){
+    if(aldeano == NULL){
+        puts("Aldeano: no tiene memoria");
+        return false;
+    }
+    if(archivo == NULL){
+        puts("Aldeano: archivo nulo");
+        return false;
+    }
+
+    fprintf(archivo,"%s\n", aldeano->nombre);
+    fprintf(archivo,"%i\n", aldeano->edad);
+    fprintf(archivo,"%i\n", aldeano->salud);
+
+    return true;
+}
+
+Aldeano *Aldeano_recuperar(FILE *archivo){
+    if(archivo == NULL){
+        puts("Aldeano: archivo nulo");
+        return false;
+    }
+
+    char nombre[100];
+    int edad;
+    int salud;
+
+
+    //fgets(nombre,100, archivo);
+    //nombre[strlen(nombre)-1] = '\0';
+    fscanf(archivo, "%s", nombre);
+    if(feof(archivo))return NULL;
+    fscanf(archivo, "%i", &edad);
+    fscanf(archivo, "%i", &salud);
+
+    Aldeano *aldeano = Aldeano_init(nombre, edad, salud);
+
+    return aldeano;
+}
+
 #endif

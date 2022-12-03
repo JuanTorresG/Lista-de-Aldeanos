@@ -219,7 +219,52 @@ bool AldeanosLista_motrar_tabla(AldeanosLista *aldeanosLista){
     return NO_ERROR;
 }
 
+bool AldeanosLista_respaldar(AldeanosLista* aldeanoslista, char *nombre_civilizacion){
+	if(aldeanoslista == NULL){
+		puts("Aldeanoslista: no tiene memoria");
+		return false;
+	}
 
+	FILE * archivo = fopen(nombre_civilizacion, "w");
+	if(archivo == NULL){
+		puts("aldeanosLista: error al crear el archivo");
+		return false;
+	}
+
+	for (size_t i = 0; i < aldeanoslista->cantidad; i++){
+		//respaldar aldeano
+		Aldeano_respaldar(aldeanoslista->aldeanos[i],archivo);
+
+	}
+
+	fclose(archivo);
+
+	return true;
+}
+
+bool AldeanosLista_recuperar(AldeanosLista *aldeanoslista,char *nombre_civilizacion){
+	if(aldeanoslista == NULL){
+		puts("Aldeanoslista: no tiene memoria");
+		return false;
+	}
+
+	FILE * archivo = fopen(nombre_civilizacion, "r");
+	if(archivo == NULL){
+		puts("aldeanosLista: error al abrir el archivo");
+		return false;
+	}
+
+	while(true){
+		//recuperar aldeano
+		Aldeano *aldeano = Aldeano_recuperar(archivo);
+		if(aldeano == NULL) break;
+		AldeanosLista_agregar_final(aldeanoslista, aldeano);
+	}
+
+	fclose(archivo);
+
+	return true;
+}
 
 #endif 
 
